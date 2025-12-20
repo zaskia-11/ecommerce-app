@@ -15,9 +15,9 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('tentang', function () {
     return view('tentang');
@@ -35,6 +35,8 @@ Route::get('/produk/{id}', function ($id) {
     return "Detail produk #$id";
 })->name('produk.detail');
 
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -85,7 +87,7 @@ Route::middleware(['auth', 'admin'])
     ->group(function () {
 
         // /admin/dashboard
-        Route::get('/dashboard', [AdminController::class, 'dashboard'])
+        Route::get('/dashboard', [DashboardController::class, 'dashboard'])
             ->name('dashboard');
         // ↑ Nama lengkap route: admin.dashboard
         // ↑ URL: /admin/dashboard
