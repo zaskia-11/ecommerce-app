@@ -1,4 +1,4 @@
-<nav class="pc-sidebar">
+<aside class="pc-sidebar">
   <div class="navbar-wrapper">
     <div class="m-header">
       <div class="p-3 border-bottom border-secondary">
@@ -129,4 +129,4 @@
       </div>
     </div>
   </div>
-</nav>
+</aside>

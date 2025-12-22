@@ -40,6 +40,7 @@
   </head>
   <!-- [Head] end -->
   <!-- [Body] Start -->
+  @stack('styles')
   <body>
     <!-- [ Pre-loader ] start -->
 <div class="loader-bg">
@@ -51,19 +52,26 @@
  <!-- [ Sidebar Menu ] start -->
    @include('layouts.partials.sidebar')
 <!-- [ Sidebar Menu ] end -->
+
  <!-- [ Header Topbar ] start -->
 
-   @include('layouts.partials.navbar')
+  <div class="layout-page">
+     @include('layouts.partials.navbar')
 <!-- [ Header ] end -->
 
 
-
-    <!-- [ Main Content ] start -->   
-    @include('partials.flash-messages')
+<div class="row justify-content-end">
+  <div class="col-lg-9 me-5">
+        @include('partials.flash-messages')
                 @yield('content')
+  </div>
+</div>
+    <!-- [ Main Content ] start -->   
+
     <!-- [ Main Content ] end -->
 
    @include('layouts.partials.footer')
+  </div>
  <!-- Required Js -->
 <script src="{{asset('assets/js/plugins/popper.min.js')}}"></script>
 <script src="{{asset('assets/js/plugins/simplebar.min.js')}}"></script>
@@ -104,6 +112,7 @@
     <!-- Apex Chart -->
     <script src="{{asset('assets/js/plugins/apexcharts.min.js')}}"></script>
     <script src="{{asset('assets/js/pages/dashboard-default.js')}}"></script>
+    @stack('scripts')
     <!-- [Page Specific JS] end -->
   </body>
   <!-- [Body] end -->
