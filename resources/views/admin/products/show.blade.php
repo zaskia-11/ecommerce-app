@@ -3,8 +3,10 @@
 @section('title', 'Detail Produk')
 
 @section('content')
+<div class="row justify-content-center">
+  <div class="col-lg-9 ">
 
-        {{-- Header --}}
+    {{-- Header --}}
         <div class="d-flex justify-content-between align-items-center mb-4 mt-5 pt-5">
             <h2 class="h3 mb-0 fw-bold text-info">
                 <i class="bi bi-eye me-1"></i> Detail Produk
@@ -111,4 +113,8 @@
             </div>
 
         </div>
+  </div>
+</div>
+
+        
 @endsection

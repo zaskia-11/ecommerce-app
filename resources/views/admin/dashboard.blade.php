@@ -2,10 +2,7 @@
 @extends('layouts.admin')
 
 @section('content')
-     <div class="pc-container">
-      <div class="pc-content">
-        <!-- [ Main Content ] start -->
-        <div class="row">
+     <div class="row">
           <!-- [ sample-page ] start -->
           <div class="col-xl-4 col-md-6">
             <div class="card bg-secondary-dark dashnum-card text-white overflow-hidden">
@@ -277,7 +274,4 @@
           </div>
           <!-- [ sample-page ] end -->
         </div>
-        <!-- [ Main Content ] end -->
-      </div>
-    </div>
 @endsection

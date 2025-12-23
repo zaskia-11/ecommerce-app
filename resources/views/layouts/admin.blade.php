@@ -20,7 +20,8 @@
     <!-- [Favicon] icon -->
     <link rel="icon" href="../assets/images/favicon.svg" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
  <!-- [Google Font] Family -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" id="main-font-link" />
 <!-- [phosphor Icons] https://phosphoricons.com/ -->
@@ -60,14 +61,14 @@
 <!-- [ Header ] end -->
 
 
-<div class="row justify-content-end">
-  <div class="col-lg-9 me-5">
-        @include('partials.flash-messages')
+        
+     <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+       @include('partials.flash-messages')
                 @yield('content')
-  </div>
-</div>
-    <!-- [ Main Content ] start -->   
-
+      </div>
+    </div>
     <!-- [ Main Content ] end -->
 
    @include('layouts.partials.footer')

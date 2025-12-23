@@ -4,7 +4,9 @@
 @section('title', 'Tambah Produk')
 
 @section('content')
-        {{-- Header --}}
+<div class="row justify-content-center">
+  <div class="col-lg-9 ">
+     {{-- Header --}}
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="h3 mb-0 fw-bold text-primary">
                 <i class="bi bi-box-seam me-1"></i> Tambah Produk Baru
@@ -141,6 +143,9 @@
 
             </div>
         </div>
+  </div>
+</div>
+       
 @endsection
 @push('scripts')
     <!-- Place the first <script> tag in your HTML's <head> -->

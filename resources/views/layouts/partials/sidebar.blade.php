@@ -1,12 +1,10 @@
-<aside class="pc-sidebar">
+<nav class="pc-sidebar">
   <div class="navbar-wrapper">
     <div class="m-header">
-      <div class="p-3 border-bottom border-secondary">
-                <a href="{{ route('admin.dashboard') }}" class="text-black text-decoration-none d-flex align-items-center">
-                    <i class="bi bi-shop fs-4 me-2"></i>
-                    <span class="fs-5 fw-bold">Admin Panel</span>
-                </a>
-            </div>
+      <a href="../dashboard/index.html" class="b-brand text-primary">
+        <!-- ========   Change your logo from here   ============ -->
+        <img src="../assets/images/logo-dark.svg" alt="" class="logo logo-lg" />
+      </a>
     </div>
     <div class="navbar-content">
       <ul class="pc-navbar">
@@ -129,4 +127,4 @@
       </div>
     </div>
   </div>
-</aside>
+</nav>

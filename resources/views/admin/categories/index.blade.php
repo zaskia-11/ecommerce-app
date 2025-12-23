@@ -4,7 +4,8 @@
 @section('title', 'Manajemen Kategori')
 
 @section('content')
-<div class="me-5 pt-5 ">
+<div class="row justify-content-center p-2">
+    <div class="col-lg-9">
         {{-- Flash Message --}}
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show">
@@ -19,14 +20,14 @@
             </div>
         @endif
 
-        <div class="card shadow-sm mb-4 mt-5">
+        <div class="card shadow-sm mb-4">
             <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
                 <h5 class="mb-0 text-primary fw-bold">Daftar Kategori</h5>
                 <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
                     <i class="bi bi-plus-lg"></i> Tambah Baru
                 </button>
             </div>
-                        <div class="card-body p-0">
+            <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
                         <thead class="table-light">
@@ -113,6 +114,7 @@
             </div>
         </div>
     </div>
+</div>
 
 {{-- ================= EDIT MODAL ================= --}}
 @foreach($categories as $category)

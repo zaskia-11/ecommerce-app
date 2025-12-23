@@ -45,6 +45,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/products', [CatalogController::class, 'index'])->name('catalog.index');
 Route::get('/products/{slug}', [CatalogController::class, 'show'])->name('catalog.show');
+Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
 
 Route::middleware('auth')->group(function () {
     // Semua route di dalam group ini HARUS LOGIN

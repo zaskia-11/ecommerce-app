@@ -3,8 +3,9 @@
 @section('title', 'Edit Produk')
 
 @section('content')
-
-        {{-- Header --}}
+<div class="row justify-content-center">
+  <div class="col-lg-9 ">
+     {{-- Header --}}
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="h3 mb-0 fw-bold text-warning">
                 <i class="bi bi-pencil-square me-1"></i> Edit Produk
@@ -177,4 +178,8 @@
             </div>
 
         </form>
+  </div>
+</div>
+
+       
 @endsection
