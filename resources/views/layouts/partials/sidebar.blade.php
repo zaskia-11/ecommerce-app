@@ -1,10 +1,12 @@
 <nav class="pc-sidebar">
   <div class="navbar-wrapper">
     <div class="m-header">
-      <a href="../dashboard/index.html" class="b-brand text-primary">
-        <!-- ========   Change your logo from here   ============ -->
-        <img src="../assets/images/logo-dark.svg" alt="" class="logo logo-lg" />
-      </a>
+       <div class="p-3 border-bottom border-secondary">
+                <a href="{{ route('admin.dashboard') }}" class="text-black text-decoration-none d-flex align-items-center">
+                    <i class="bi bi-shop fs-4 me-2"></i>
+                    <span class="fs-5 fw-bold">Admin Panel</span>
+                </a>
+            </div>
     </div>
     <div class="navbar-content">
       <ul class="pc-navbar">
@@ -13,31 +15,24 @@
           <i class="ti ti-dashboard"></i>
         </li>
         <li class="pc-item">
-          <a href="../dashboard/index.html" class="pc-link"
+          <a href="../admin/dashboard" class="pc-link"
             ><span class="pc-micon"><i class="ti ti-dashboard"></i></span><span class="pc-mtext">Default</span></a
           >
         </li>
 
         <li class="pc-item pc-caption">
-          <label>Elements</label>
+          <label>Pages</label>
           <i class="ti ti-apps"></i>
         </li>
         <li class="pc-item">
-          <a href="../elements/bc_typography.html" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-typography"></i></span>
-            <span class="pc-mtext">Typography</span>
+          <a href="{{ route('admin.categories.index') }}" class="pc-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
+              <i class="bi bi-folder me-2"></i> Kategori
           </a>
         </li>
         <li class="pc-item">
-          <a href="../elements/bc_color.html" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-color-swatch"></i></span>
-            <span class="pc-mtext">Color</span>
-          </a>
-        </li>
-        <li class="pc-item">
-          <a href="../elements/icon-tabler.html" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-plant-2"></i></span>
-            <span class="pc-mtext">Icons</span>
+          <a href="{{ route('admin.products.index') }}"
+              class="pc-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
+              <i class="bi bi-box-seam me-2"></i> Produk
           </a>
         </li>
 

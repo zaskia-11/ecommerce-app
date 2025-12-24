@@ -35,8 +35,9 @@
     <li class="pc-h-item d-none d-md-inline-flex">
       <form class="header-search">
         <i data-feather="search" class="icon-search"></i>
-        <input type="search" class="form-control" placeholder="Search here. . ." />
-        <button class="btn btn-light-secondary btn-search"><i class="ti ti-adjustments-horizontal"></i></button>
+        <input type="text" name="q" class="form-control" placeholder="Cari produk..."
+        value="{{ request('q') }}">
+        <button class="btn btn-light-secondary btn-search" type="submit"><i class="ti ti-adjustments-horizontal"></i></button>
       </form>
     </li>
   </ul>
@@ -44,102 +45,44 @@
 <!-- [Mobile Media Block end] -->
 <div class="ms-auto">
   <ul class="list-unstyled">
-    <li class="dropdown pc-h-item">
-      <a
-        class="pc-head-link head-link-secondary dropdown-toggle arrow-none me-0"
-        data-bs-toggle="dropdown"
-        href="#"
-        role="button"
-        aria-haspopup="false"
-        aria-expanded="false"
-      >
-        <i class="ti ti-bell"></i>
-      </a>
-      <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
-        <div class="dropdown-header">
-          <a href="#!" class="link-primary float-end text-decoration-underline">Mark as all read</a>
-          <h5>
-            All Notification
-            <span class="badge bg-warning rounded-pill ms-1">01</span>
-          </h5>
-        </div>
-        <div class="dropdown-header px-0 text-wrap header-notification-scroll position-relative" style="max-height: calc(100vh - 215px)">
-          <div class="list-group list-group-flush w-100">
-            <div class="list-group-item list-group-item-action">
-              <div class="d-flex">
-                <div class="flex-shrink-0">
-                  <div class="user-avtar bg-light-success"><i class="ti ti-building-store"></i></div>
-                </div>
-                <div class="flex-grow-1 ms-1">
-                  <span class="float-end text-muted">3 min ago</span>
-                  <h5>Store Verification Done</h5>
-                  <p class="text-body fs-6">We have successfully received your request.</p>
-                  <div class="badge rounded-pill bg-light-danger">Unread</div>
-                </div>
-              </div>
-            </div>
-            <div class="list-group-item list-group-item-action">
-              <div class="d-flex">
-                <div class="flex-shrink-0">
-                  <img src="../assets/images/user/avatar-3.jpg" alt="user-image" class="user-avtar" />
-                </div>
-                <div class="flex-grow-1 ms-1">
-                  <span class="float-end text-muted">10 min ago</span>
-                  <h5>Joseph William</h5>
-                  <p class="text-body fs-6">It is a long established fact that a reader will be distracted</p>
-                  <div class="badge rounded-pill bg-light-success">Confirmation of Account</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="dropdown-divider"></div>
-        <div class="text-center py-2">
-          <a href="#!" class="link-primary">Mark as all read</a>
-        </div>
-      </div>
-    </li>
+    
     <li class="dropdown pc-h-item header-user-profile">
-      <a
-        class="pc-head-link head-link-primary dropdown-toggle arrow-none me-0"
+      <a 
+        class="ps-3 w-100 pc-head-link head-link-secondary dropdown-toggle arrow-none me-5"
         data-bs-toggle="dropdown"
         href="#"
         role="button"
         aria-haspopup="false"
         aria-expanded="false"
       >
-        <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar" />
-        <span>
-          <i class="ti ti-settings"></i>
-        </span>
+       <img src="{{ auth()->user()->avatar_url }}" class="rounded-circle me-2" width="32" height="32"
+            alt="{{ auth()->user()->name }}">
+        <span class="pe-3 d-none d-lg-inline">{{ auth()->user()->name }}</span>
       </a>
       <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
         <div class="dropdown-header">
           <h4>
             Good Morning,
-            <span class="small text-muted">John Doe</span>
+            <span class="small text-muted">Admin</span>
           </h4>
-          <p class="text-muted">Project Admin</p>
           <hr />
           <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 280px)">
-            <div class="upgradeplan-block bg-light-warning rounded">
-              <h4>Explore full code</h4>
-              <p class="text-muted">Buy now to get full access of code files</p>
-              <a href="https://codedthemes.com/item/berry-bootstrap-5-admin-template/" target="_blank" class="btn btn-warning">Buy Now</a>
-            </div>
-            <hr />
-            <a href="../application/account-profile-v1.html" class="dropdown-item">
-              <i class="ti ti-settings"></i>
-              <span>Account Settings</span>
-            </a>
-            <a href="../application/social-profile.html" class="dropdown-item">
-              <i class="ti ti-user"></i>
-              <span>Social Profile</span>
-            </a>
-            <a href="../pages/login-v1.html" class="dropdown-item">
-              <i class="ti ti-logout"></i>
-              <span>Logout</span>
-            </a>
+             <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                  <i class="bi bi-person me-2"></i> Profil Saya
+              </a>
+              <a class="dropdown-item" href="{{ route('orders.index') }}">
+                  <i class="bi bi-bag me-2"></i> Pesanan Saya
+              </a>                       
+              <hr>
+             <a class="dropdown-item text-primary" href="{{ route('admin.dashboard') }}">
+                  <i class="bi bi-speedometer2 me-2"></i> Admin Panel
+              </a>
+            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="bi bi-box-arrow-right me-2"></i> Logout
+                                </button>
+                            </form>
           </div>
         </div>
       </div>
