@@ -16,61 +16,72 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Services\MidtransService;
+use App\Http\Controllers\PaymentController;// routes/web.php
+use App\Http\Controllers\MidtransNotificationController;
 
-Route::get('/debug-midtrans', function () {
-    // Cek apakah config terbaca
-    $config = [
-        'merchant_id'   => config('midtrans.merchant_id'),
-        'client_key'    => config('midtrans.client_key'),
-        'server_key'    => config('midtrans.server_key') ? '***SET***' : 'NOT SET',
-        'is_production' => config('midtrans.is_production'),
-    ];
+// ============================================================
+// MIDTRANS WEBHOOK
+// Route ini HARUS public (tanpa auth middleware)
+// Karena diakses oleh SERVER Midtrans, bukan browser user
+// ============================================================
+Route::post('midtrans/notification', [MidtransNotificationController::class, 'handle'])
+    ->name('midtrans.notification');
 
-    // Test buat dummy token
-    try {
-        $service = new MidtransService();
+// use App\Services\MidtransService;
 
-        // Buat dummy order untuk testing
-        $dummyOrder = new \App\Models\Order();
-        $dummyOrder->order_number = 'TEST-' . time();
-        $dummyOrder->total_amount = 10000;
-        $dummyOrder->shipping_cost = 0;
-        $dummyOrder->shipping_name = 'Test User';
-        $dummyOrder->shipping_phone = '08123456789';
-        $dummyOrder->shipping_address = 'Jl. Test No. 123';
-        $dummyOrder->user = (object) [
-            'name'  => 'Tester',
-            'email' => 'test@example.com',
-            'phone' => '08123456789',
-        ];
-        // Dummy items
-        $dummyOrder->items = collect([
-            (object) [
-                'product_id'   => 1,
-                'product_name' => 'Produk Test',
-                'price'        => 10000,
-                'quantity'     => 1,
-            ],
-        ]);
+// Route::get('/debug-midtrans', function () {
+//     // Cek apakah config terbaca
+//     $config = [
+//         'merchant_id'   => config('midtrans.merchant_id'),
+//         'client_key'    => config('midtrans.client_key'),
+//         'server_key'    => config('midtrans.server_key') ? '***SET***' : 'NOT SET',
+//         'is_production' => config('midtrans.is_production'),
+//     ];
 
-        $token = $service->createSnapToken($dummyOrder);
+//     // Test buat dummy token
+//     try {
+//         $service = new MidtransService();
 
-        return response()->json([
-            'status'  => 'SUCCESS',
-            'message' => 'Berhasil terhubung ke Midtrans!',
-            'config'  => $config,
-            'token'   => $token,
-        ]);
+//         // Buat dummy order untuk testing
+//         $dummyOrder = new \App\Models\Order();
+//         $dummyOrder->order_number = 'TEST-' . time();
+//         $dummyOrder->total_amount = 10000;
+//         $dummyOrder->shipping_cost = 0;
+//         $dummyOrder->shipping_name = 'Test User';
+//         $dummyOrder->shipping_phone = '08123456789';
+//         $dummyOrder->shipping_address = 'Jl. Test No. 123';
+//         $dummyOrder->user = (object) [
+//             'name'  => 'Tester',
+//             'email' => 'test@example.com',
+//             'phone' => '08123456789',
+//         ];
+//         // Dummy items
+//         $dummyOrder->items = collect([
+//             (object) [
+//                 'product_id'   => 1,
+//                 'product_name' => 'Produk Test',
+//                 'price'        => 10000,
+//                 'quantity'     => 1,
+//             ],
+//         ]);
 
-    } catch (\Exception $e) {
-        return response()->json([
-            'status'  => 'ERROR',
-            'message' => $e->getMessage(),
-            'config'  => $config,
-        ], 500);
-    }
-});
+//         $token = $service->createSnapToken($dummyOrder);
+
+//         return response()->json([
+//             'status'  => 'SUCCESS',
+//             'message' => 'Berhasil terhubung ke Midtrans!',
+//             'config'  => $config,
+//             'token'   => $token,
+//         ]);
+
+//     } catch (\Exception $e) {
+//         return response()->json([
+//             'status'  => 'ERROR',
+//             'message' => $e->getMessage(),
+//             'config'  => $config,
+//         ], 500);
+//     }
+// });
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -105,6 +116,14 @@ Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index
 Route::middleware('auth')->group(function () {
     // Semua route di dalam group ini HARUS LOGIN
 
+    // Payment Routes
+    Route::get('/orders/{order}/pay', [PaymentController::class, 'show'])
+        ->name('orders.pay');
+    Route::get('/orders/{order}/success', [PaymentController::class, 'success'])
+        ->name('orders.success');
+    Route::get('/orders/{order}/pending', [PaymentController::class, 'pending'])
+        ->name('orders.pending');
+
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
         ->name('home');
     // ↑ ->name('home') = Memberi nama route
@@ -136,7 +155,9 @@ Route::middleware('auth')->group(function () {
     // Profil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');    
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/profile/avatar', [ProfileController::class, 'deleteAvatar'])->name('profile.avatar.destroy');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');   
 });
 
 Route::middleware(['auth', 'admin'])
@@ -206,12 +227,5 @@ Route::controller(GoogleController::class)->group(function () {
 
 // routes/web.php
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::delete('/profile/avatar', [ProfileController::class, 'deleteAvatar'])->name('profile.avatar.destroy');
-    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
-});
 
 Auth::routes();
