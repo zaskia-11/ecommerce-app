@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\PaymentController;// routes/web.php
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MidtransNotificationController;
 
 // ============================================================
@@ -117,12 +117,10 @@ Route::middleware('auth')->group(function () {
     // Semua route di dalam group ini HARUS LOGIN
 
     // Payment Routes
-    Route::get('/orders/{order}/pay', [PaymentController::class, 'show'])
-        ->name('orders.pay');
-    Route::get('/orders/{order}/success', [PaymentController::class, 'success'])
-        ->name('orders.success');
-    Route::get('/orders/{order}/pending', [PaymentController::class, 'pending'])
-        ->name('orders.pending');
+     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+    Route::get('/orders/{order}/success', [OrderController::class, 'success'])->name('orders.success');
+    Route::get('/orders/{order}/pending', [OrderController::class, 'pending'])->name('orders.pending');
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
         ->name('home');

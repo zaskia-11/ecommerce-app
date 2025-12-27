@@ -5,6 +5,10 @@ use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
+     public function Dashboard() {
+        return view('admin.dashboard');
+    }
+
     public function index()
     {
         $stats = [

@@ -35,15 +35,12 @@
               <i class="bi bi-box-seam me-2"></i> Produk
           </a>
         </li>
-
-        <li class="pc-item pc-caption">
-          <label>Pages</label>
-          <i class="ti ti-news"></i>
-        </li>
         <li class="pc-item">
-          <a class="pc-link" target="_blank" href="../pages/login-v3.html">
-            <span class="pc-micon"><i class="ti ti-lock"></i></span>
-            <span class="pc-mtext">Login</span>
+          <a class="pc-link" href="/admin/orders" aria-expanded="false">
+              <span>
+                  <i class="ti ti-receipt"></i>
+              </span>
+              <span class="hide-menu">Pesanan</span>
           </a>
         </li>
         <li class="pc-item">
