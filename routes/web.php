@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MidtransNotificationController;
+use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\ReportController as AdminReportController;
 
 // ============================================================
 // MIDTRANS WEBHOOK
@@ -164,7 +166,7 @@ Route::middleware(['auth', 'admin'])
     ->group(function () {
 
         // /admin/dashboard
-        Route::get('/dashboard', [DashboardController::class, 'dashboard'])
+        Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('dashboard');
         // ↑ Nama lengkap route: admin.dashboard
         // ↑ URL: /admin/dashboard
@@ -183,8 +185,6 @@ Route::middleware(['auth', 'admin'])
         // Dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Produk CRUD
-    Route::resource('products', AdminProductController::class);
 
     // Kategori CRUD
     Route::resource('categories', AdminCategoryController::class);
@@ -199,6 +199,11 @@ Route::middleware(['auth', 'admin'])
 
     // Produk
     Route::resource('products', ProductController::class);
+    
+   Route::get('/reports', [ReportController::class, 'index'])->name('reports.sales');
+    
+    // Tambahkan ini:
+    Route::get('/reports/exportSales', [ReportController::class, 'exportSales'])->name('reports.exportSales');
 
 });
 
