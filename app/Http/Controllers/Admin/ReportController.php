@@ -23,7 +23,7 @@ class ReportController extends Controller
      * 3. Grafik Penjualan per Kategori (Analitik)
      * 4. Tabel Detail Transaksi dengan Pagination
      */
-    public function index(Request $request)
+    public function sales(Request $request)
     {
         // 1. Tentukan Default Tanggal
         // Jika user tidak memilih tanggal, kita set default ke BULAN INI.

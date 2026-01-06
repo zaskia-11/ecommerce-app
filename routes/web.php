@@ -195,10 +195,14 @@ Route::middleware(['auth', 'admin'])
     // Produk
     Route::resource('products', ProductController::class);
     
-   Route::get('/reports', [ReportController::class, 'index'])->name('reports.sales');
+  // Laporan Penjualan
+    Route::get('/reports/sales', [\App\Http\Controllers\Admin\ReportController::class, 'sales'])->name('reports.sales');// Tambahkan ini:
+    Route::get('/reports/exportSales', [\App\Http\Controllers\Admin\ReportController::class, 'exportSales'])->name('reports.exportSales');
+    // Update status pesanan
+    Route::patch('/orders/{order}/update-status', [\App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('orders.update-status');
+
     
-    // Tambahkan ini:
-    Route::get('/reports/exportSales', [ReportController::class, 'exportSales'])->name('reports.exportSales');
+    
 
 });
 

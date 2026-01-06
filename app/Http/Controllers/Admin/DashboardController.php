@@ -67,9 +67,21 @@ class DashboardController extends Controller
             ->where('created_at', '>=', now()->subDays(7)) // Filter 7 hari ke belakang
             ->groupBy('date') // Kelompokkan baris berdasarkan tanggal
             ->orderBy('date', 'asc') // Urutkan kronologis
-            ->get();
+            ->get()
+            ->keyBy('date'); // Index by date untuk mapping mudah
+
+        // Buat array 7 hari lengkap dengan data 0 jika tidak ada transaksi
+        $revenueChart = collect();
+        for ($i = 6; $i >= 0; $i--) {
+            $date = now()->subDays($i)->format('Y-m-d');
+            $dayData = $revenueChart->get($date);
+
+            $revenueChart->push([
+                'date' => now()->subDays($i)->format('d M'),
+                'total' => $dayData ? $dayData->total : 0
+            ]);
+        }
 
         return view('admin.dashboard', compact('stats', 'recentOrders', 'topProducts', 'revenueChart'));
-    }
-
+    }      
 }

@@ -44,7 +44,7 @@
           </a>
         </li>
         <li class="pc-item">
-          <a class="pc-link" href="/admin/reports" aria-expanded="false">
+          <a class="pc-link" href="/admin/reports/sales" aria-expanded="false">
               <span>
                   <i class="ti ti-receipt"></i>
               </span>
