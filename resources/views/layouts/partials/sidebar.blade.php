@@ -15,7 +15,7 @@
           <i class="ti ti-dashboard"></i>
         </li>
         <li class="pc-item">
-          <a href="../admin/dashboard" class="pc-link"
+          <a href="{{ route('admin.dashboard') }}"  class="pc-link"
             ><span class="pc-micon"><i class="ti ti-dashboard"></i></span><span class="pc-mtext">Default</span></a
           >
         </li>
@@ -44,7 +44,7 @@
           </a>
         </li>
         <li class="pc-item">
-          <a class="pc-link" href="/admin/reports/sales" aria-expanded="false">
+          <a class="pc-link" href="{{ route('admin.reports.sales') }}" aria-expanded="false">
               <span>
                   <i class="ti ti-receipt"></i>
               </span>

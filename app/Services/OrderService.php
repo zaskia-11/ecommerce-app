@@ -42,8 +42,9 @@ class OrderService
                 if ($item->quantity > $item->product->stock) {
                     throw new \Exception("Stok produk {$item->product->name} tidak mencukupi.");
                 }
-                $totalAmount += $item->product->discount_price * $item->quantity;
-            }
+                $price = $item->product->final_price;
+                $totalAmount += $price * $item->quantity;
+
 
             // B. BUAT HEADER ORDER
             $order = Order::create([
@@ -62,12 +63,13 @@ class OrderService
                 $order->items()->create([
                     'product_id'   => $item->product_id,
                     'product_name' => $item->product->name,
-                    'price'        => $item->product->discount_price,
+                    'price'        => $price,                
                     'quantity'     => $item->quantity,
-                    'subtotal'     => $item->product->discount_price * $item->quantity,
+                    'subtotal'     => $price * $item->quantity,
                 ]);
                 $item->product->decrement('stock', $item->quantity);
             }
+        }
 
             // D. Pastikan relasi user di-load sebelum generate Snap Token
             $order->load('user');

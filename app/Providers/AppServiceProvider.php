@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void
-{
+    {
     Product::observe(ProductObserver::class);
-}
+    }
 }
