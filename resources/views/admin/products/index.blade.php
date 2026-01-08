@@ -4,7 +4,7 @@
 
 @section('content')
         
-<div class="d-flex justify-content-between align-items-center mb-4 pt-5 mt-5">
+<div class="d-flex justify-content-between align-items-center mb-4 ">
     <h2 class="h3 text-gray-800">Daftar Produk</h2>
     <a href="{{ route('admin.products.create') }}" class="btn btn-primary">
         <i class="bi bi-plus-lg"></i> Tambah Produk

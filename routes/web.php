@@ -193,7 +193,8 @@ Route::middleware(['auth', 'admin'])
     Route::resource('categories', CategoryController::class)->except(['show']); // Kategori biasanya tidak butuh show detail page
 
     // Produk
-    Route::resource('products', ProductController::class);
+    Route::resource('/products', AdminProductController::class);
+    Route::resource('products', AdminProductController::class);
     
   // Laporan Penjualan
     Route::get('/reports/sales', [\App\Http\Controllers\Admin\ReportController::class, 'sales'])->name('reports.sales');// Tambahkan ini:
